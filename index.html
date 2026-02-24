@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOTO. | Digital Photo Booth</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+    <div id="flash"></div>
+
+    <header>
+        <div class="nav-left">
+            <div class="lang-toggle">
+                <button onclick="setLang('en')" id="btn-en" class="active">EN</button>
+                <button onclick="setLang('kh')" id="btn-kh">KH</button>
+            </div>
+        </div>
+        <div class="nav-center">
+            <h2 class="logo-small" onclick="location.reload()">FOTO<span class="dot">.</span></h2>
+        </div>
+        <div class="nav-right">
+            <button id="theme-toggle" class="icon-btn">
+                <svg id="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22">
+                    <path class="sun-path" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-width="2" stroke-linecap="round"></path>
+                    <path class="moon-path hidden" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div id="progress-bar" class="hidden">
+        <div class="step-box" id="st-1"><span>1</span><label id="lbl-step1">Layout</label></div>
+        <div class="step-connector"></div>
+        <div class="step-box" id="st-2"><span>2</span><label id="lbl-step2">Snap</label></div>
+        <div class="step-connector"></div>
+        <div class="step-box" id="st-3"><span>3</span><label id="lbl-step3">Design</label></div>
+    </div>
+
+    <main>
+        <section id="view-home" class="view active">
+            <h1 class="main-logo">FOTO<span class="dot">.</span></h1>
+            <button class="start-btn" onclick="startApp()" id="btn-start">START SESSION</button>
+        </section>
+
+        <section id="view-layout" class="view">
+            <h2 class="view-title" id="title-layout">Select Style</h2>
+            <div class="layout-grid">
+                <div class="layout-card" onclick="selectLayout('strip')">
+                    <div class="l-preview strip-p"><span></span><span></span><span></span></div>
+                    <h3>Classic Strip</h3>
+                </div>
+                <div class="layout-card" onclick="selectLayout('grid')">
+                    <div class="l-preview grid-p"><span></span><span></span><span></span><span></span></div>
+                    <h3>Modern Grid</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-camera" class="view">
+            <div class="cam-wrapper">
+                <div class="cam-box">
+                    <video id="video" autoplay playsinline></video>
+                    <div id="countdown" class="hidden">3</div>
+                    <div class="snap-badge"><span id="count-num">0</span>/4</div>
+                </div>
+                
+                <div class="cam-controls">
+                    <div class="filter-bar">
+                        <button class="f-pill active" onclick="setFilter('none')">Natural</button>
+                        <button class="f-pill" onclick="setFilter('grayscale(100%)')">B&W</button>
+                        <button class="f-pill" onclick="setFilter('sepia(60%) contrast(1.1)')">Retro</button>
+                        <button class="f-pill" onclick="setFilter('brightness(1.2) saturate(1.5)')">Vivid</button>
+                    </div>
+                    <div class="shutter-container">
+                        <button id="shutter" class="shutter-btn" onclick="runCapture()"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-editor" class="view">
+            <div class="editor-wrap">
+                <div class="preview-area">
+                    <div id="final-strip" class="photo-strip">
+                        <div id="strip-inner"></div>
+                        <div class="strip-footer">FOTO. — 2026</div>
+                    </div>
+                </div>
+                <div class="controls-area">
+                    <h3 id="title-frame">Frame Color</h3>
+                    <div class="color-row">
+                        <button class="c-dot" style="background:#fff" onclick="changeColor('#fff')"></button>
+                        <button class="c-dot" style="background:#fce4ec" onclick="changeColor('#fce4ec')"></button>
+                        <button class="c-dot" style="background:#111" onclick="changeColor('#111')"></button>
+                    </div>
+                    <div class="action-stack">
+                        <button class="p-btn" onclick="finishSession()" id="btn-save">Save & Finish</button>
+                        <button class="s-btn" onclick="location.reload()" id="btn-discard">Discard</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <canvas id="hidden-canvas" style="display:none;"></canvas>
+    <script src="script.js"></script>
+</body>
+</html>

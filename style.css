@@ -1,0 +1,104 @@
+:root {
+    --bg: #ffffff; --text: #111111; --dot: #FF0000;
+    --ui: #f5f5f7; --border: #e5e5e5;
+}
+body.dark-mode {
+    --bg: #0a0a0a; --text: #ffffff; --dot: #ff3b30;
+    --ui: #1c1c1e; --border: #2c2c2e;
+}
+
+.p-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #888;
+}
+
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; transition: 0.3s; overflow-x: hidden; }
+
+/* Header Symmetry */
+header {
+    position: fixed; top: 0; width: 100%; height: 70px; padding: 0 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--bg); border-bottom: 1px solid var(--border); z-index: 1000; box-sizing: border-box;
+}
+.nav-left, .nav-right { flex: 1; display: flex; align-items: center; }
+.nav-right { justify-content: flex-end; }
+.nav-center { flex: 1; display: flex; justify-content: center; }
+
+.lang-toggle { display: flex; gap: 8px; }
+.lang-toggle button { background: none; border: none; color: var(--text); opacity: 0.3; font-weight: 800; font-size: 11px; cursor: pointer; transition: 0.2s; }
+.lang-toggle button.active { opacity: 1; border-bottom: 2px solid var(--dot); }
+.icon-btn { background: none; border: none; cursor: pointer; color: var(--text); }
+.logo-small { font-weight: 900; font-size: 1.4rem; letter-spacing: -1.5px; cursor: pointer; margin: 0; }
+.dot { color: var(--dot); }
+
+/* Progress Bar */
+#progress-bar { position: fixed; top: 90px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; z-index: 900; }
+.step-box { display: flex; flex-direction: column; align-items: center; opacity: 0.2; }
+.step-box.active { opacity: 1; }
+.step-box span { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--text); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 10px; }
+.step-box label { font-size: 8px; font-weight: 700; text-transform: uppercase; margin-top: 4px; }
+.step-connector { width: 30px; height: 1px; background: var(--border); margin-bottom: 12px; }
+
+/* Camera Section (Spaced out) */
+#view-camera { padding-top: 180px; }
+.cam-wrapper { display: flex; flex-direction: column; align-items: center; gap: 35px; }
+.cam-box { position: relative; width: 340px; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+
+/* Filter Bar Glass-morphism */
+.filter-bar {
+    display: flex; gap: 6px; background: rgba(150, 150, 150, 0.08);
+    padding: 6px; border-radius: 50px; backdrop-filter: blur(15px);
+    border: 1px solid var(--border); margin-bottom: 20px;
+}
+.f-pill {
+    background: transparent; border: none; color: var(--text); padding: 8px 16px;
+    border-radius: 40px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: 0.3s;
+}
+.f-pill.active { background: var(--text); color: var(--bg); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+/* Shutter */
+.shutter-container { display: flex; justify-content: center; width: 100%; }
+.shutter-btn {
+    width: 72px; height: 72px; border-radius: 50%; background: var(--dot);
+    border: 5px solid white; box-shadow: 0 0 0 2px var(--text); cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.shutter-btn:active { transform: scale(0.9); }
+
+/* Layout Cards */
+.layout-grid { display: flex; gap: 20px; }
+.layout-card { background: var(--ui); padding: 30px; border-radius: 24px; cursor: pointer; text-align: center; border: 2px solid transparent; transition: 0.3s; }
+.layout-card:hover { border-color: var(--text); transform: translateY(-5px); }
+.l-preview { background: #ddd; margin: 0 auto 15px; padding: 6px; border-radius: 6px; display: flex; gap: 4px; }
+.strip-p { width: 40px; height: 85px; flex-direction: column; }
+.grid-p { width: 70px; height: 70px; display: grid; grid-template-columns: 1fr 1fr; }
+.l-preview span { background: #bbb; flex: 1; border-radius: 2px; }
+
+/* Editor Layout */
+.editor-wrap { display: flex; align-items: flex-start; gap: 40px; }
+.photo-strip { background: white; padding: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+#strip-inner.strip-mode { display: flex; flex-direction: column; gap: 6px; }
+#strip-inner.grid-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+#strip-inner img { width: 150px; aspect-ratio: 4/3; object-fit: cover; display: block; }
+#strip-inner.grid-mode img { width: 120px; }
+.strip-footer { color: #000; font-weight: 900; font-size: 0.6rem; text-align: center; margin-top: 10px; }
+
+.controls-area { text-align: left; min-width: 200px; }
+.color-row { display: flex; gap: 12px; margin: 15px 0 30px; }
+.c-dot { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
+.c-dot:hover { transform: scale(1.1); }
+.p-btn { width: 100%; background: var(--text); color: var(--bg); border: none; padding: 14px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+.s-btn { width: 100%; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 12px; border-radius: 12px; margin-top: 10px; cursor: pointer; }
+
+/* Views */
+.view { display: none; padding-top: 140px; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
+.view.active { display: flex; }
+.main-logo { font-size: 7.5rem; font-weight: 900; letter-spacing: -6px; margin: 0; }
+.start-btn { padding: 18px 55px; border-radius: 50px; background: var(--text); color: var(--bg); font-weight: 800; border: none; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+.start-btn:hover { letter-spacing: 1px; }
+
+#flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; opacity: 0; z-index: 2000; pointer-events: none; transition: 0.1s; }
+#countdown { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 7rem; font-weight: 900; color: white; }
+.hidden { display: none !important; }
